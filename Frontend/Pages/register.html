@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Pay - Register</title>
+    <!-- Add Tailwind CSS CDN for the modern design -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <!-- Link to your custom style.css (ensure path is correct relative to Pages/ ) -->
+    <link rel="stylesheet" href="../Css/style.css">
+</head>
+<!-- APPLY BACKGROUND IMAGE TO BODY, AND USE FLEX FOR CENTERING -->
+<body class="flex items-center justify-center min-h-screen bg-gray-900 bg-cover bg-no-repeat text-white font-sans"
+    style="background-image: url('../images/Login.jpg');"> <!-- Placeholder: Set your actual image path here! -->
+
+    <!-- This div now wraps the existing content and applies the consistent card style -->
+    <div class="bg-gray-800 bg-opacity-50 p-8 rounded-xl shadow-2xl w-full max-w-md space-y-6 backdrop-blur-md">
+        <h2 class="text-3xl font-bold text-center text-orange-500">Register for Smart Pay</h2>
+        <form id="registerForm" class="space-y-4">
+            <div>
+                <label for="name" class="block text-gray-300 text-sm font-bold mb-2">Full Name:</label>
+                <input type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline bg-gray-700 bg-opacity-50 placeholder-slate-200" id="name" placeholder="Enter full name" required>
+            </div>
+            <div>
+                <label for="mobile" class="block text-gray-300 text-sm font-bold mb-2">Mobile Number:</label>
+                <input type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline bg-gray-700 bg-opacity-50 placeholder-slate-200" id="mobile" placeholder="Enter mobile number" required>
+            </div>
+            <div>
+                <label for="email" class="block text-gray-300 text-sm font-bold mb-2">Email Address:</label>
+                <input type="email" class="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline bg-gray-700 bg-opacity-50 placeholder-slate-200" id="email" placeholder="your@example.com" required>
+            </div>
+            <div>
+                <label for="password" class="block text-gray-300 text-sm font-bold mb-2">Password:</label>
+                <input type="password" class="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline bg-gray-700 bg-opacity-50 placeholder-slate-200" id="password" placeholder="********" required>
+            </div>
+
+            <button type="submit" class="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline transition duration-200">
+                Register
+            </button>
+        </form>
+        <p id="message" class="mt-3 text-center text-sm"></p>
+
+        <p class="mt-3 text-center text-gray-400 text-sm">
+            Already have an account?
+            <a href="login.html" class="text-orange-500 hover:underline">Login here</a>
+        </p>
+    </div>
+
+    <script src="../Js/Register.js"></script>
+</body>
+</html>

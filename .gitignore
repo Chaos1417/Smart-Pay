@@ -1,0 +1,16 @@
+# General Ignores
+.DS_Store
+*.log
+*.swp
+*.bak
+*.zip
+*.rar
+
+# Node modules for Frontend (if you use npm for any frontend tooling)
+/Frontend/node_modules/
+
+# Backend specific ignores (ensure these are also in Backend/.gitignore for clarity)
+/Backend/bin/
+/Backend/obj/
+/Backend/appsettings.Development.json # This is the most important one for security
+/Backend/publish/

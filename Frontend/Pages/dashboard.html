@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Pay Dashboard</title>
+    <!-- Link to your custom style.css (ensure path is correct relative to Pages/) -->
+    <link rel="stylesheet" href="../Css/style.css">
+    <!-- Tailwind CSS CDN - this is crucial for the design -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <!-- Font Awesome for icons (e.g., trash icon for delete) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<!-- APPLY BACKGROUND IMAGE TO BODY, AND USE FLEX FOR CENTERING -->
+<body class="flex items-center justify-center min-h-screen bg-gray-900 bg-cover bg-no-repeat text-white font-sans"
+    style="background-image: url('../images/Dashboard.jpg');"> <!-- Placeholder: Set your actual image path here! -->
+
+    <!-- The dashboard-container now gets its own background and transparency -->
+    <div id="dashboard-container" class="bg-gray-800 bg-opacity-50 p-8 rounded-xl shadow-2xl w-full max-w-4xl space-y-8 backdrop-blur-md">
+
+        <!-- Header and User Info Section -->
+        <header class="flex justify-between items-center mb-6">
+            <h1 class="text-4xl font-extrabold text-orange-500">Smart Pay</h1>
+            <div class="text-right">
+                <p class="text-lg font-semibold" id="userName">Loading User...</p>
+                <p class="text-sm text-gray-400" id="userEmail"></p>
+                <button id="logoutBtn" class="mt-2 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition duration-200 text-sm shadow-md">Logout</button>
+            </div>
+        </header>
+
+        <!-- Balance Card -->
+        <div class="bg-gradient-to-r from-orange-500 to-amber-600 p-6 rounded-xl shadow-lg flex justify-between items-center transform hover:scale-105 transition-transform duration-300">
+            <div>
+                <p class="text-lg font-medium text-orange-200">Current Balance</p>
+                <p class="text-5xl font-bold mt-2" id="userBalance">PKR 0.00</p>
+            </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <button id="transferFundsBtn" class="px-6 py-3 rounded-lg text-white font-semibold text-lg transition duration-200 shadow-md flex items-center justify-center bg-orange-500 hover:bg-orange-600">
+                <span class="text-2xl mr-2">💸</span> Transfer Funds
+            </button>
+            <button id="addBeneficiaryBtn" class="px-6 py-3 rounded-lg text-white font-semibold text-lg transition duration-200 shadow-md flex items-center justify-center bg-orange-500 hover:bg-orange-600">
+                <span class="text-2xl mr-2">➕</span> Add Beneficiary
+            </button>
+            <button id="viewAllTransactionsBtn" class="px-6 py-3 rounded-lg text-white font-semibold text-lg transition duration-200 shadow-md flex items-center justify-center bg-orange-500 hover:bg-orange-600">
+                <span class="text-2xl mr-2">📜</span> View All Transactions
+            </button>
+        </div>
+
+        <!-- NEW BUTTON: View/Manage Beneficiaries -->
+        <div class="grid grid-cols-1 md:grid-cols-1 gap-4">
+            <button id="manageBeneficiariesBtn" class="px-6 py-3 rounded-lg text-white font-semibold text-lg transition duration-200 shadow-md flex items-center justify-center bg-gray-600 hover:bg-gray-700">
+                <span class="text-2xl mr-2">👥</span> Manage Beneficiaries
+            </button>
+        </div>
+
+
+        <!-- Recent Transactions Section -->
+        <section id="recent-transactions-section" class="bg-gray-700 p-6 rounded-xl shadow-lg">
+            <h2 class="text-2xl font-bold text-gray-200 mb-4">Recent Transactions</h2>
+            <div id="recentTransactionsList" class="space-y-3">
+                <p class="text-gray-400 text-center" id="noRecentTransactions">No recent transactions found.</p>
+            </div>
+        </section>
+
+        <!-- Full Transaction History Section (Initially Hidden) -->
+        <section id="all-transactions-section" class="bg-gray-700 p-6 rounded-xl shadow-lg hidden">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-2xl font-bold text-gray-200">All Transactions History</h2>
+                <button id="backToDashboardBtn" class="px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition duration-200 text-sm shadow-md">Back to Dashboard</button>
+            </div>
+            <div id="allTransactionsList" class="overflow-x-auto rounded-lg shadow-md">
+                <table class="min-w-full table-auto">
+                    <thead>
+                        <tr class="bg-gray-600 text-gray-300 uppercase text-sm leading-normal">
+                            <th class="py-3 px-6 text-left rounded-tl-lg">Date</th>
+                            <th class="py-3 px-6 text-left">Type</th>
+                            <th class="py-3 px-6 text-left">Description</th>
+                            <th class="py-3 px-6 text-right rounded-tr-lg">Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-gray-300 text-sm font-light" id="transactionHistoryTableBody">
+                        <!-- All transactions will be loaded here by JavaScript -->
+                    </tbody>
+                </table>
+                <p class="text-gray-400 text-center mt-4 hidden" id="noAllTransactions">No full transaction history found.</p>
+            </div>
+        </section>
+
+        <!-- NEW SECTION: Manage Beneficiaries (Initially Hidden) -->
+        <section id="manage-beneficiaries-section" class="bg-gray-700 p-6 rounded-xl shadow-lg hidden">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-2xl font-bold text-gray-200">Manage Beneficiaries</h2>
+                <button id="backToDashboardFromBeneficiariesBtn" class="px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition duration-200 text-sm shadow-md">Back to Dashboard</button>
+            </div>
+            <div id="beneficiariesListTable" class="overflow-x-auto rounded-lg shadow-md">
+                <table class="min-w-full table-auto">
+                    <thead>
+                        <tr class="bg-gray-600 text-gray-300 uppercase text-sm leading-normal">
+                            <th class="py-3 px-6 text-left rounded-tl-lg">Beneficiary Name</th>
+                            <th class="py-3 px-6 text-left">Account Number (Email)</th>
+                            <th class="py-3 px-6 text-right rounded-tr-lg">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-gray-300 text-sm font-light" id="beneficiariesTableBody">
+                        <!-- Beneficiaries will be loaded here by JavaScript -->
+                    </tbody>
+                </table>
+                <p class="text-gray-400 text-center mt-4 hidden" id="noBeneficiaries">No beneficiaries found.</p>
+                <div id="beneficiaryActionFeedback" class="mt-4 text-center text-sm"></div>
+            </div>
+        </section>
+
+
+        <!-- Transfer Funds Modal (Initially Hidden) -->
+        <div id="transferFundsModal" class="modal-overlay hidden">
+            <div class="modal-content bg-gray-800 text-white p-6 rounded-xl shadow-lg">
+                <h3 class="text-xl font-bold mb-4">Transfer Funds</h3>
+                <form id="transferForm" class="space-y-4">
+                    <div>
+                        <label for="beneficiarySelect" class="block text-gray-300 text-sm font-bold mb-2">Select Beneficiary:</label>
+                        <select id="beneficiarySelect" name="beneficiaryId" class="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline bg-gray-700 bg-opacity-50 placeholder-slate-200">
+                            <!-- Beneficiaries will be loaded here -->
+                        </select>
+                    </div>
+                    <div>
+                        <label for="transferAmount" class="block text-gray-300 text-sm font-bold mb-2">Amount:</label>
+                        <input type="number" id="transferAmount" name="amount" step="0.01" min="0.01" class="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline bg-gray-700 bg-opacity-50 placeholder-slate-200" placeholder="0.00" required>
+                    </div>
+
+                    <!-- Transaction Type Select -->
+                    <div>
+                        <label for="transactionTypeSelect" class="block text-gray-300 text-sm font-bold mb-2">Transaction Type:</label>
+                        <select id="transactionTypeSelect" class="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline bg-gray-700 bg-opacity-50" required>
+                            <option value="">Select Type</option>
+                            <option value="Donation">Donation</option>
+                            <option value="Bill Payment">Bill Payment</option>
+                            <option value="Tax">Tax</option>
+                            <option value="Miscellaneous">Miscellaneous</option>
+                            <option value="General Transfer">General Transfer</option>
+                        </select>
+                    </div>
+
+                    <!-- Description Input -->
+                    <div>
+                        <label for="transferDescription" class="block text-gray-300 text-sm font-bold mb-2">Description (Optional):</label>
+                        <input type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline bg-gray-700 bg-opacity-50 placeholder-slate-200" id="transferDescription" placeholder="e.g., Monthly rent, Charity to XYZ">
+                    </div>
+
+                    <div class="flex justify-end space-x-4">
+                        <button type="button" id="cancelTransferBtn" class="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700">Cancel</button>
+                        <button type="submit" class="px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600">Transfer</button>
+                    </div>
+                    <div id="transferFeedback" class="mt-4 text-center"></div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Add Beneficiary Modal (Initially Hidden) -->
+        <div id="addBeneficiaryModal" class="modal-overlay hidden">
+            <div class="modal-content bg-gray-800 text-white p-6 rounded-xl shadow-lg">
+                <h3 class="text-xl font-bold mb-4">Add New Beneficiary</h3>
+                <form id="addBeneficiaryForm" class="space-y-4">
+                    <div>
+                        <label for="newBeneficiaryName" class="block text-gray-300 text-sm font-bold mb-2">Beneficiary Name:</label>
+                        <input type="text" id="newBeneficiaryName" name="name" class="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline bg-gray-700 bg-opacity-50 placeholder-slate-200" required>
+                    </div>
+                    <div>
+                        <label for="newBeneficiaryAccount" class="block text-gray-300 text-sm font-bold mb-2">Account Number (Email):</label>
+                        <input type="email" id="newBeneficiaryAccount" name="accountNumber" class="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline bg-gray-700 bg-opacity-50 placeholder-slate-200" required>
+                    </div>
+                    <div class="flex justify-end space-x-4">
+                        <button type="button" id="cancelAddBeneficiaryBtn" class="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700">Cancel</button>
+                        <button type="submit" class="px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600">Add Beneficiary</button>
+                    </div>
+                    <div id="addBeneficiaryFeedback" class="mt-4 text-center"></div>
+                </form>
+            </div>
+        </div>
+
+        <!-- NEW: Confirmation Modal for Deletion -->
+        <div id="confirmationModal" class="modal-overlay hidden">
+            <div class="modal-content bg-gray-800 text-white p-6 rounded-xl shadow-lg">
+                <h3 class="text-xl font-bold mb-4">Confirm Deletion</h3>
+                <p id="confirmationMessage" class="mb-6"></p>
+                <div class="flex justify-end space-x-4">
+                    <button type="button" id="cancelConfirmBtn" class="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700">Cancel</button>
+                    <button type="button" id="confirmDeleteBtn" class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700">Delete</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Corrected Script Path for dashboard.js -->
+    <script src="../Js/Dashboard.js"></script>
+</body>
+</html>

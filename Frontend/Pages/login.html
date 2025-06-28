@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Pay - Login</title>
+    <!-- Tailwind CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <!-- Link to your custom style.css (ensure path is correct relative to Pages/) -->
+    <link rel="stylesheet" href="../Css/style.css">
+</head>
+<body class="bg-gray-900 font-sans">
+    <!-- Main container with background image -->
+    <div class="flex h-screen w-full items-center justify-center bg-gray-900 bg-cover bg-no-repeat"
+        style="background-image: url('../images/Login.jpg')"> <!-- Ensure this path is correct for your image -->
+
+        <!-- Login form container -->
+        <div class="rounded-xl bg-gray-800 bg-opacity-50 px-16 py-10 shadow-lg backdrop-blur-md max-sm:px-8">
+            <div class="text-white">
+                <div class="mb-8 flex flex-col items-center">
+                    <h1 class="mb-2 text-3xl font-bold text-orange-500">Smart Pay</h1>
+                    <span class="text-gray-300">Enter Login Details</span>
+                </div>
+                <form id="loginForm" action="#">
+                    <div class="mb-4 text-lg">
+                        <!-- Input field updated for Option 3: translucent dark gray background and white text -->
+                        <input
+                            class="rounded-3xl border-none bg-gray-700 bg-opacity-50 px-6 py-2 text-center text-white placeholder-slate-200 shadow-lg outline-none backdrop-blur-md"
+                            type="email" id="email" name="email" placeholder="email@example.com" required />
+                    </div>
+
+                    <div class="mb-4 text-lg">
+                        <!-- Input field updated for Option 3: translucent dark gray background and white text -->
+                        <input
+                            class="rounded-3xl border-none bg-gray-700 bg-opacity-50 px-6 py-2 text-center text-white placeholder-slate-200 shadow-lg outline-none backdrop-blur-md"
+                            type="password" id="password" name="password" placeholder="********" required />
+                    </div>
+
+                    <!-- Feedback message area -->
+                    <p id="loginFeedback" class="text-center text-sm mt-4"></p>
+
+                    <div class="mt-8 flex justify-center text-lg">
+                        <button type="submit"
+                            class="rounded-3xl bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-10 shadow-xl backdrop-blur-md transition-colors duration-300">
+                            Login
+                        </button>
+                    </div>
+                </form>
+
+                <p class="mt-4 text-center text-gray-300 text-sm">
+                    New user?
+                    <a href="register.html" class="text-orange-500 hover:underline">Register here</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script src="../Js/Login.js"></script>
+</body>
+</html>

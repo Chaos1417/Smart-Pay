@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Pay - Admin Panel</title>
+    <!-- REMOVED Bootstrap CSS -->
+    <!-- Add Tailwind CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../Css/style.css" />
+</head>
+
+<!-- APPLY BACKGROUND IMAGE TO BODY, AND USE FLEX FOR CENTERING -->
+<body class="flex items-center justify-center min-h-screen bg-gray-900 bg-cover bg-no-repeat text-white font-sans"
+    style="background-image: url('../images/Login.jpg');"> <!-- Placeholder: Set your actual image path here! -->
+
+    <!-- Main content container (matches login/dashboard card style) -->
+    <div class="rounded-xl bg-gray-800 bg-opacity-50 px-16 py-10 shadow-lg backdrop-blur-md w-full max-w-4xl space-y-6">
+        <!-- Changed text-center and added text-orange-500 -->
+        <h1 class="text-4xl font-extrabold text-center text-orange-500">Smart Pay - Admin Panel</h1>
+        <!-- Added mt-6, text-gray-200 -->
+        <h3 class="mt-6 text-2xl font-semibold text-gray-200">Pending Users</h3>
+        
+        <!-- Table Styling: Replaced Bootstrap table classes with Tailwind -->
+        <div class="overflow-x-auto rounded-lg shadow-md">
+            <table class="min-w-full table-auto">
+                <thead>
+                    <tr class="bg-gray-600 text-gray-300 uppercase text-sm leading-normal">
+                        <th class="py-3 px-6 text-left rounded-tl-lg">User ID</th>
+                        <th class="py-3 px-6 text-left">Name</th>
+                        <th class="py-3 px-6 text-left">Email</th>
+                        <th class="py-3 px-6 text-left">Mobile</th>
+                        <th class="py-3 px-6 text-left">Status</th>
+                        <th>Action</th>
+                        <th class="py-3 px-6 text-right rounded-tr-lg"></th> <!-- Empty header for action button -->
+                    </tr>
+                </thead>
+                <tbody class="text-gray-300 text-sm font-light" id="pendingUsersBody">
+                    <!-- Pending users will be loaded here dynamically -->
+                    <tr><td colspan="7" class="py-3 px-6 text-center text-gray-400">Loading pending users...</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="flex justify-center mt-8">
+            <!-- Changed Bootstrap btn-danger to Tailwind red button -->
+            <button id="logoutButton" class="px-6 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 transition duration-200 text-lg shadow-md">Logout</button>
+        </div>
+    </div>
+
+    <!-- REMOVED Bootstrap JS -->
+    <script src="../Js/Admin.js"></script> <!-- Ensure this path is correct -->
+</body>
+
+</html>
